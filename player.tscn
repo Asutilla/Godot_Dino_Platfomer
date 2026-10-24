@@ -1,0 +1,106 @@
+[gd_scene format=3 uid="uid://dve8hfghfvdfr"]
+
+[ext_resource type="Texture2D" uid="uid://77gwsrfj313i" path="res://assets/characters/dinoIdle.png/idle_0.png" id="2_bwjto"]
+[ext_resource type="Texture2D" uid="uid://6r18gwpuaphe" path="res://assets/characters/dinoIdle.png/idle_1.png" id="3_606se"]
+[ext_resource type="Texture2D" uid="uid://dkwi81xphpd3d" path="res://assets/characters/dinoIdle.png/idle_2.png" id="4_u1c27"]
+[ext_resource type="Texture2D" uid="uid://cjbn0dgmnr4os" path="res://assets/characters/dinoIdle.png/idle_3.png" id="5_op7ga"]
+[ext_resource type="Texture2D" uid="uid://7du871d35ui" path="res://assets/characters/dinoIdle.png/idle_4.png" id="6_q13i1"]
+[ext_resource type="Texture2D" uid="uid://dxm4frsm2cnxp" path="res://assets/characters/dinoRun.png/run_2.png" id="7_pylmc"]
+[ext_resource type="Texture2D" uid="uid://b486n75rum2ir" path="res://assets/characters/dinoRun.png/run_3.png" id="8_pbfsw"]
+[ext_resource type="Texture2D" uid="uid://b6vkvgvup6ysk" path="res://assets/characters/dinoRun.png/run_4.png" id="9_5tmop"]
+[ext_resource type="Texture2D" uid="uid://bf7knxwgr80y2" path="res://assets/characters/dinoRun.png/run_0.png" id="10_7ahtn"]
+[ext_resource type="Texture2D" uid="uid://c22rmtu334ty8" path="res://assets/characters/dinoRun.png/run_1.png" id="11_7lmhl"]
+[ext_resource type="Texture2D" uid="uid://cficryc63vjma" path="res://assets/characters/dinoRun.png/run_5.png" id="12_dx0e4"]
+[ext_resource type="Texture2D" uid="uid://ds2wxo3wbp52l" path="res://assets/characters/dinoRun.png/run_7.png" id="14_jm5j8"]
+[ext_resource type="Script" uid="uid://d1qsu4c0tinqu" path="res://player.gd" id="33_tkwlq"]
+[ext_resource type="Texture2D" uid="uid://bh6slf38qr1yl" path="res://assets/characters/dinoRun.png/run_6.png" id="33_xg1a7"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xrivr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_bwjto")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_606se")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_u1c27")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_op7ga")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_q13i1")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_pylmc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_pbfsw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_5tmop")
+}],
+"loop": 1,
+"name": &"jumping",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_7ahtn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_7lmhl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_pylmc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_pbfsw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_5tmop")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_dx0e4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_xg1a7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_jm5j8")
+}],
+"loop": 1,
+"name": &"running",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hiqhm"]
+size = Vector2(76.5, 142)
+
+[node name="Player" type="CharacterBody2D" unique_id=1145887710 groups=["player"]]
+position = Vector2(64, 625)
+script = ExtResource("33_tkwlq")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1237701023]
+position = Vector2(1, 0)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_xrivr")
+animation = &"running"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1347978499]
+visible = false
+position = Vector2(26.25, 0)
+shape = SubResource("RectangleShape2D_hiqhm")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1090325182]
+limit_left = 0
+limit_top = 0
+limit_right = 1698
+limit_bottom = 700

@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dpuejrc6wo62a"]
+
+[ext_resource type="Texture2D" uid="uid://5174o8t67g3w" path="res://assets/collectibles/mushroom1.png/Mushroom_1.png" id="34_ii52t"]
+[ext_resource type="Script" uid="uid://c0e8jslk00bhv" path="res://collectible.gd" id="34_j2gq5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j2gq5"]
+radius = 22.857162
+
+[node name="Collectible" type="Area2D" unique_id=387413585]
+scale = Vector2(2, 2)
+script = ExtResource("34_j2gq5")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=460194448]
+texture = ExtResource("34_ii52t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1519389152]
+shape = SubResource("CircleShape2D_j2gq5")

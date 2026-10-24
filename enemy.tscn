@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://1g43dvmxf5hh"]
+
+[ext_resource type="Script" uid="uid://by2c1vhmfj41r" path="res://enemy.gd" id="1_4gyqm"]
+[ext_resource type="Texture2D" uid="uid://drupr5cv2sxqt" path="res://assets/characters/enemy/enemy_porcupine.png" id="1_7k104"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xrivr"]
+size = Vector2(85, 63)
+
+[node name="Enemy" type="Area2D" unique_id=115466419]
+script = ExtResource("1_4gyqm")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=803816163]
+texture = ExtResource("1_7k104")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1295614973]
+position = Vector2(-0.5, -0.5)
+shape = SubResource("RectangleShape2D_xrivr")

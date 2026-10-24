@@ -1,0 +1,20 @@
+# Godot 4+ specific ignores
+.godot/
+.nomedia
+.import/
+export.cfg
+export_credentials.cfg
+*.translation
+.mono/
+data_*/
+mono_crash.*.json
+
+# Project rules
+*.tmp
+build/
+export/
+*.exe
+*.pck
+Thumbs.db
+desktop.ini
+.DS_Store
