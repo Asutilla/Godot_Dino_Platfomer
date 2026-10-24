@@ -1,20 +1,24 @@
 # Dino Platformer
 
-A small 2D platformer made with **Godot 4.7**. Guide a dinosaur across floating platforms, collect mushrooms and crates, avoid patrolling porcupines, and don't fall in the water.
+![Godot 4.7](https://img.shields.io/badge/Godot-4.7-478CBF?logo=godotengine&logoColor=white)
+![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey)
 
-![Gameplay](Screenshot%202026-10-25%20015457.png)
-![Game Over screen](Screenshot%202026-10-25%20015509.png)
+A compact 2D platformer built with **Godot 4.7**. Guide a dinosaur across floating platforms, grab mushrooms and crates, dodge patrolling porcupines, and don't fall in the water.
+
+| Gameplay | Game Over |
+| :---: | :---: |
+| ![Gameplay](docs/gameplay.png) | ![Game Over](docs/game-over.png) |
 
 ## Features
 
-- Tight, responsive platforming with gravity, jumping, and horizontal movement
-- Animated player character (idle, running, jumping) with sprite flipping
-- Patrolling enemies that turn around at fixed limits and end the run on contact
+- Smooth platforming with gravity, jumping, and sprite flipping
+- Animated player character: idle, running, and jumping
+- Patrolling porcupine enemies that turn at fixed limits and end the run on contact
 - Collectibles with a live counter in the HUD
-- Kill zone below the level for falling off the map
-- Game Over overlay with a Retry button, plus a Reset button to restart anytime
+- Kill zone for falling off the map
+- Game Over overlay with Retry, plus a Reset button at any time
 - Hand-built level using `TileMapLayer` and a tile atlas
-- No plugins, no external dependencies — just open and run
+- No plugins or external dependencies — open and run
 
 ## Controls
 
@@ -26,64 +30,55 @@ A small 2D platformer made with **Godot 4.7**. Guide a dinosaur across floating 
 | Reset level | `Reset` button (top right) |
 | Retry after game over | `Retry` button |
 
-## Requirements
-
-- **Godot 4.7 or newer** (built and tested with 4.7.1, Forward+ renderer)
-- Windows, Linux, or macOS
-
-Older 4.x releases cannot open this project without upgrading it first.
-
 ## Getting Started
 
-### Clone the repository
+**Requirements:** Godot **4.7 or newer** (tested with 4.7.1, Forward+ renderer). Older 4.x versions cannot open this project without upgrading it.
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/YOUR-REPO.git
-cd YOUR-REPO
+git clone https://github.com/Asutilla/Godot_Dino_Platfomer.git
+cd Godot_Dino_Platfomer
 ```
 
-### Open in Godot
+1. Launch Godot 4.7+ and choose **Import**.
+2. Select `project.godot` from this folder, then **Import & Edit**.
+3. Wait for the assets to import on first open, then press **F5**.
 
-1. Launch Godot 4.7+.
-2. Click **Import**, select the `project.godot` file in this folder, then **Import & Edit**.
-3. Wait for the assets to import on first open.
-4. Press **F5** (or the Play button) to run the game.
-
-From the command line:
+Or from the command line:
 
 ```bash
 godot --path . --editor   # open the editor
-godot --path .            # run the game directly
+godot --path .            # run the game
 ```
 
-> The `.godot/` folder is a generated cache and is not committed. Godot recreates it automatically on first open, so the first launch takes a few seconds longer.
+> `.godot/` is a generated cache and is not committed. Godot recreates it automatically, so the first launch takes a few extra seconds.
 
 ## Project Structure
 
 ```text
 .
-├── project.godot          # Project settings, input map, window config
-├── main.tscn              # The level: tilemap, player, enemies, pickups, HUD
-├── player.tscn / .gd      # CharacterBody2D player controller and animations
-├── enemy.tscn / .gd       # Patrolling enemy (Area2D) that triggers game over
+├── project.godot          # Settings, input map, window size
+├── main.tscn              # Level: tilemap, player, enemies, pickups, HUD
+├── player.tscn / .gd      # CharacterBody2D controller and animations
+├── enemy.tscn / .gd       # Patrolling enemy that triggers game over
 ├── collectible.tscn / .gd # Pickup that increments the counter
 ├── kill_zone.tscn / .gd   # Fall-off-the-map trigger
 ├── game_over.tscn / .gd   # Game Over overlay with Retry
+├── docs/                  # Screenshots used in this README
 └── assets/
-    ├── backgrounds/       # Sky/background art
-    ├── characters/        # Dino idle + run frames, porcupine enemy
-    ├── collectibles/      # Mushroom and crate sprites
+    ├── backgrounds/
+    ├── characters/        # Dino frames and porcupine
+    ├── collectibles/
     ├── objects/           # Bushes, trees, signs, stones, props
-    └── tilesets/          # 18 terrain tiles used by the tilemap
+    └── tilesets/          # 18 terrain tiles
 ```
 
-### How the pieces fit together
+### How it works
 
-- **`player.gd`** applies gravity when airborne, reads the `move_left` / `move_right` axes, jumps only while on the floor, and switches animations based on state. Collecting an item increments `collected` and updates the HUD label.
-- **`enemy.gd`** walks back and forth between `start_x ± patrol_distance`, flipping its sprite to face the walking direction.
+- **`player.gd`** applies gravity when airborne, reads the `move_left` / `move_right` axes, jumps only while grounded, and switches animations based on state.
+- **`enemy.gd`** walks between `start_x ± patrol_distance` and flips its sprite to face the walking direction.
 - **`collectible.gd`** calls `collect_item()` on any body that supports it, then frees itself.
 - **`kill_zone.gd`** and **`enemy.gd`** both call `show_game_over()` on the level's `GameOver` node.
-- **`game_over.gd`** pauses the player's physics/input, shows the overlay, and reloads the current scene on Retry.
+- **`game_over.gd`** pauses the player, shows the overlay, and reloads the scene on Retry.
 
 ## Customizing
 
@@ -92,19 +87,17 @@ godot --path .            # run the game directly
 | Player speed / jump height | `player.gd` → `speed`, `jump_velocity` |
 | Enemy speed / patrol range | `enemy.gd` → `speed`, `patrol_distance` |
 | Window size | `project.godot` → `display/window/size` |
-| Key bindings | `project.godot` → `[input]`, or **Project → Project Settings → Input Map** |
-| Level layout | `main.tscn` (open in the editor and paint on the `GroundTiles` layer) |
-| Pickup appearance | `collectible.tscn` → `item_texture` export on each instance |
+| Key bindings | **Project → Project Settings → Input Map** |
+| Level layout | `main.tscn` → paint on the `GroundTiles` layer |
+| Pickup appearance | `collectible.tscn` → `item_texture` on each instance |
 
 ## Credits
 
-- Art: *TODO — add the name, author, and link of the free tileset pack used for the sprites and tiles.*
-- Engine: [Godot Engine](https://godotengine.org/) (MIT License)
+- **Art:** free 2D platformer tileset pack — *replace with the pack's name and author link.*
+- **Engine:** [Godot Engine](https://godotengine.org) (MIT License)
 
-> Check the asset pack's license before publishing this repository publicly. If it requires attribution, put it here and in the game's credits.
+If the tileset license requires attribution, add it here before distributing this project.
 
 ## License
 
-Code: **TODO — add your chosen license** (e.g. MIT) and include a `LICENSE` file.
-
-Art assets are covered by their own license — see [Credits](#credits).
+This project is shared for learning and demo purposes. Add a `LICENSE` file if you intend to redistribute it. Art assets remain under the tileset pack's original license.
