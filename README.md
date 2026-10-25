@@ -93,11 +93,11 @@ godot --path .            # run the game
 
 ## Credits
 
-- **Art:** free 2D platformer tileset pack — *replace with the pack's name and author link.*
+- **Art:** free 2D platformer tileset pack — https://www.reddit.com/r/animation/comments/zzqndm/lil_practice_walk_cycle_made_in_procreate_based/
 - **Engine:** [Godot Engine](https://godotengine.org) (MIT License)
 
 If the tileset license requires attribution, add it here before distributing this project.
 
 ## License
 
-This project is shared for learning and demo purposes. Add a `LICENSE` file if you intend to redistribute it. Art assets remain under the tileset pack's original license.
+This project is shared for learning and demo purposes.
